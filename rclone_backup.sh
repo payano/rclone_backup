@@ -10,8 +10,6 @@ BACKUP_FILE_NAME=""
 
 BACKUP_FOLDERS=(
 		"/opt/scripts"
-#		"/data/nextcloud/johan"
-#		"/data/nextcloud/anna"
 		)
 
 get_time()
