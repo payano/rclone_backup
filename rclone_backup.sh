@@ -12,6 +12,9 @@ COPY_ERROR=0
 
 BACKUP_FOLDERS=(
 		"/opt/scripts"
+		#"/data/files/"
+		#"/data/system/"
+
 		)
 
 get_time()
