@@ -8,6 +8,8 @@ BACKUP_MAX_CNT="5" # if one each day, keep 10 backups
 BACKUP_SIZE=0 # dont change this
 BACKUP_FILE_NAME=""
 
+COPY_ERROR=0
+
 BACKUP_FOLDERS=(
 		"/opt/scripts"
 		)
@@ -105,7 +107,7 @@ copy_backup_to_dest "${BACKUP_FILE_NAME}" ${RCLONE_REMOTE_PATH}
 if [ $? -ne 0 ]
 then
 	echo "$(get_time): Could not copy the backup..."
-	exit 1
+	COPY_ERROR=1
 fi
 
 echo "$(get_time): Remove tmp file.."
@@ -115,6 +117,13 @@ then
 	echo "$(get_time): Could not remove tmp file..."
 	exit 1
 fi
+
+if [ $COPY_ERROR -ne 0 ]
+then
+	echo "something went wrong in the copy_backup_to_dest..."
+	exit 1
+fi
+
 
 echo "$(get_time): Remove old backups.."
 remove_old_backups $BACKUP_MAX_CNT 
