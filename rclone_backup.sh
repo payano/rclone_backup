@@ -2,7 +2,7 @@
 
 RCLONE_CONFIG="google_drive"
 RCLONE_REMOTE_PATH="/"
-TMP_COMPRESS_DIR="/data/tmp"
+TMP_COMPRESS_DIR="/data2/tmp"
 BACKUP_MAX_CNT="5" # if one each day, keep 10 backups
 
 BACKUP_SIZE=0 # dont change this
@@ -11,10 +11,8 @@ BACKUP_FILE_NAME=""
 COPY_ERROR=0
 
 BACKUP_FOLDERS=(
-		"/opt/scripts"
-		#"/data/files/"
-		#"/data/system/"
-
+		"/var/lib/docker/volumes/"
+		"/data/files/"
 		)
 
 get_time()
@@ -34,6 +32,7 @@ compress_and_store_backup()
 	fi
 	BACKUP_SIZE=$(du -hs $BACKUP_FILE_NAME | awk '{print $1}')
 	FILE_NAME=$(basename $BACKUP_FILE_NAME)
+	return 0
 }
 
 copy_backup_to_dest()
